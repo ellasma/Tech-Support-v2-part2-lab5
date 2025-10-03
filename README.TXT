@@ -22,10 +22,17 @@ Then start describing your problem by typing in the terminal window.
 ---------------------------------
 24. The HashMap class contructs an empty HashMap with the default initial capacity and the default load factor. 
 25. Type Parameters: K-the type of keys maintained by this map. V-the type of mapped values.
-
-26.
-27.
-28.
+Method that depends on these types:
+ get(Object key)
+ compute(K key, BiFunction<? super K,? super V,? extends V> remappingFunction)
+ computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)
+ computeIfPresent(K key, BiFunction<? super K,? super V,? extends V> remappingFunction)
+ merge(K key, V value, BiFunction<? super V,? super V,? extends V> remappingFunction)
+ put(K key, V value)
+ remove(Object key)
+26. We use the size() method to check how many entries are contained in a map.
+27. Created class MapTester
+28. It replaces the old value with the new one.
 29.
 30.
 31.
