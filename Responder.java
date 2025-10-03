@@ -1,4 +1,6 @@
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -14,6 +16,8 @@ public class Responder
 {
     private Random randomGenerator;
     private ArrayList<String> responses;
+    private String lastDefault;
+    private Random random;
 
     /**
      * Construct a Responder

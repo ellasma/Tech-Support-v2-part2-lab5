@@ -33,10 +33,11 @@ Method that depends on these types:
 26. We use the size() method to check how many entries are contained in a map.
 27. Created class MapTester
 28. It replaces the old value with the new one.
-29.
-30.
-31.
-32.
+29. They both exist in the map.
+30. if (phonebook.containsKey("Asma")
+       System.out.println("Asma")
+31. It returns null.
+32. 
 33.
 34.
 35.
