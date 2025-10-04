@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class Responder
 {
-    private Random randomGenerator;
-    private ArrayList<String> responses;
+    private HashMap<String, String> responseMap;
+    private ArrayList<String> defaultResponses;
     private String lastDefault;
     private Random random;
 
@@ -24,9 +24,12 @@ public class Responder
      */
     public Responder()
     {
-        randomGenerator = new Random();
-        responses = new ArrayList<>();
-        fillResponses();
+        responseMap = new HashMap<>();
+        defaultResponses = new ArrayList<>();
+        lastDefault = "";
+        random = new Random();
+        fillResponsesMap();
+        fillDefaultResponses();
     }
 
     /**
@@ -34,37 +37,37 @@ public class Responder
      * 
      * @return  A string that should be displayed as the response
      */
-    public String generateResponse()
+    public String generateResponse (HashSet<String> inputWords)
     {
-        // Pick a random number for the index in the default response 
-        // list. The number will be between 0 (inclusive) and the size
-        // of the list (exclusive).
-        int index = randomGenerator.nextInt(responses.size());
-        return responses.get(index);
+        for(String word : inputWords) {
+        if (responseMap.containsKey(word)) {
+            return responseMap.get(word);
+        }
     }
-
-    /**
-     * Build up a list of default responses from which we can pick one
-     * if we don't know what else to say.
-     */
-    private void fillResponses()
-    {
-        responses.add("That sounds odd. Could you describe this in more detail?");
-        responses.add("""
-                      No other customer has ever complained about this before.
-                      What is your system configuration?
-                      """);
-        responses.add("I need a bit more information on that.");
-        responses.add("Have you checked that you do not have a dll conflict?");
-        responses.add("That is covered in the manual. Have you read the manual?");
-        responses.add("""
-                      Your description is a bit wishy-washy. Have you got an expert
-                      there with you who could describe this more precisely?
-                      """);
-        responses.add("That's not a bug, it's a feature!");
-        responses.add("Could you elaborate on that?");
-        responses.add("Have you tried running the app on your phone?");
-        responses.add("I just checked StackOverflow - they don't know either.");
+        return pickDefaultResponse();
+    }
+    
+    private void fillResponsesMap() {
+        responseMap.put("hello", "hi there!");
+        responseMap.put("bye", "Goodbye");
+        responseMap.put("slow", "Have you tried restarting your computer?");
+        responseMap.put("crash", "That's bad. Describe what were you doing");
+        responseMap.put("bug", "Please give more details");
+    }
+    
+    private void fillDefaultResponses() {
+        defaultResponses.add("I don't understand.");
+        defaultResponses.add("Can you elaborate a little more?");
+        defaultResponses.add("Tell me more about it.");
+    }
+    
+    private String pickDefaultResponse() {
+        String response;
+        do {
+            response = defaultResponses.get(random.nextInt(defaultResponses.size()));
+        }   while(response.equals(lastDefault));
+        lastDefault = response;
+        return response;
     }
 }
 

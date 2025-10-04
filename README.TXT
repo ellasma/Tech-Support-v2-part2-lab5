@@ -37,12 +37,15 @@ Method that depends on these types:
 30. if (phonebook.containsKey("Asma")
        System.out.println("Asma")
 31. It returns null.
-32. 
-33.
-34.
-35.
-36.
-37.
+32.
+ for (String key : phoneBook.keySet()) {
+     System.out.println(key);
+ }
+33. added the code in the Responder class
+34. They both store collections of elements and allow iteration. They're differences: HashSet stores unique elements, ArrayList allows duplicates and maintains insertion order.
+35. HashSet->words are unordered. ArrayList->words are returned in insertion order.
+36. Use String.split("")
+37. 
 38.
 39
 40.
